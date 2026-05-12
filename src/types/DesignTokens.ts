@@ -1,15 +1,6 @@
-type TokenType =
-	| 'color'
-	| 'dimension'
-	| 'fontFamily'
-	| 'fontWeight'
-	| 'duration'
-	| 'cubicBezier'
-	| 'number';
-
 export type JSONDesignToken = {
 	$value: unknown;
-	$type?: TokenType;
+	$type?: string;
 	$deprecated?: boolean | string;
 	$description?: string;
 	$extensions?: Object;

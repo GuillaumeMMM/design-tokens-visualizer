@@ -1,4 +1,5 @@
 import type { DesignToken, JSONDesignToken, JSONDesignTokens } from '../types/DesignTokens';
+import type { TokenError } from '../types/TokenError';
 
 function isPlainObject(value: any) {
 	if (typeof value !== 'object' || value === null) {
@@ -17,9 +18,14 @@ function isPlainObject(value: any) {
 
 function _flattenTokens(
 	slice: JSONDesignTokens | JSONDesignToken,
-	result: DesignToken[] = [],
-	keyMemo: string[] = []
-): DesignToken[] {
+	result: { tokens: DesignToken[]; errors: TokenError[] },
+	keyMemo: string[],
+	inherited: {
+		type?: string;
+		description?: string;
+		extensions?: Record<string, unknown>;
+	}
+): { tokens: DesignToken[]; errors: TokenError[] } {
 	for (let key in slice) {
 		if (!Object.hasOwn(slice, key)) {
 			continue;
@@ -33,17 +39,40 @@ function _flattenTokens(
 		}
 
 		if (sliceValue && typeof sliceValue === 'object' && Object.hasOwn(sliceValue, '$value')) {
-			result.push({
-				...(sliceValue as JSONDesignToken),
-				key: `{${[...keyMemo, key].join('.')}}`
+			const token = sliceValue as JSONDesignToken;
+
+			const finalType = token.$type ?? inherited.type;
+			const finalKey = `{${[...keyMemo, key].join('.')}}`;
+
+			if (!finalType) {
+				result.errors.push({ type: 'MISSING_TYPE', token: { ...token, key: finalKey } });
+			}
+
+			if (['{', '}', '.'].some((char) => [...keyMemo, key].some((kStr) => kStr.includes(char)))) {
+				result.errors.push({ type: 'UNAUTHORIZED_KEY_STR', token: { ...token, key: finalKey } });
+			}
+
+			result.tokens.push({
+				...token,
+				$type: token.$type ?? inherited.type,
+				$description: token.$description ?? inherited.description,
+				key: finalKey
 			});
 		} else {
-			_flattenTokens(sliceValue as JSONDesignTokens | JSONDesignToken, result, keyMemo.concat(key));
+			_flattenTokens(
+				sliceValue as JSONDesignTokens | JSONDesignToken,
+				result,
+				keyMemo.concat(key),
+				{
+					type: (slice as JSONDesignToken).$type ?? inherited.type,
+					description: (slice as JSONDesignToken).$description ?? inherited.description
+				}
+			);
 		}
 	}
 	return result;
 }
 
 export function flattenDTCGTokens(tokens: JSONDesignTokens) {
-	return _flattenTokens(tokens);
+	return _flattenTokens(tokens, { tokens: [], errors: [] }, [], {});
 }

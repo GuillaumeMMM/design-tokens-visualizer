@@ -1,22 +1,30 @@
 <script lang="ts">
+	import type { DesignToken } from '../types/DesignTokens';
 	import type { TokenError, TokenErrorType } from '../types/TokenError';
 
 	const { errors } = $props<{ errors: TokenError[] }>();
 
 	const errorsDisplay: {
-		[key in TokenErrorType]: { message: string; criticity: 'error' | 'warning' };
+		[key in TokenErrorType]: {
+			message: (token: DesignToken) => string;
+			criticity: 'error' | 'warning';
+		};
 	} = {
 		INVALID_JSON: {
-			message: 'Invalid JSON format',
+			message: () => 'Invalid JSON format',
 			criticity: 'error'
 		},
 		EMPTY: {
-			message: 'No design tokens found',
+			message: () => 'No design tokens found',
 			criticity: 'error'
 		},
 		MISSING_TYPE: {
-			message: 'Token does not have a type',
+			message: (token) => `Token ${token.key} does not have a type`,
 			criticity: 'warning'
+		},
+		UNAUTHORIZED_KEY_STR: {
+			message: (token) => `Token ${token.key} keys contain unauthorized characters`,
+			criticity: 'error'
 		}
 	};
 </script>
@@ -26,7 +34,7 @@
 		{#each errors as error}
 			<li class="console-error">
 				{errorsDisplay[(error as TokenError).type].criticity === 'error' ? '⛔ ' : '⚠️ '}
-				{errorsDisplay[(error as TokenError).type].message}
+				{errorsDisplay[(error as TokenError).type].message(error.token)}
 			</li>
 		{/each}
 	</ul>

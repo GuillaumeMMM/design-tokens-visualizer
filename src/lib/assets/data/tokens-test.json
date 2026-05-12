@@ -3,85 +3,85 @@
 		"button": {
 			"default": {
 				"$value": "{color.border.default}",
-				"type": "color"
+				"$type": "color"
 			}
 		},
 		"grey": {
 			"0": {
 				"$value": "#fff",
-				"type": "color"
+				"$type": "color"
 			},
 			"100": {
 				"$value": "#f1f1f4",
-				"type": "color"
+				"$type": "color"
 			},
 			"200": {
 				"$value": "#cbcdd2",
-				"type": "color"
+				"$type": "color"
 			},
 			"300": {
 				"$value": "#90949d",
-				"type": "color"
+				"$type": "color"
 			},
 			"400": {
 				"$value": "#696a6f",
-				"type": "color"
+				"$type": "color"
 			},
 			"500": {
 				"$value": "#35363A",
-				"type": "color"
+				"$type": "color"
 			},
 			"600": {
 				"$value": "#161617",
-				"type": "color"
+				"$type": "color"
 			}
 		},
 		"text": {
 			"default": {
 				"$value": "{color.grey.600}",
-				"type": "color"
+				"$type": "color"
 			},
 			"subtle": {
 				"$value": "{color.grey.400}",
-				"type": "color"
+				"$type": "color"
 			},
 			"disabled": {
 				"$value": "{color.grey.400}",
-				"type": "color"
+				"$type": "color"
 			},
 			"inverted": {
 				"$value": "{color.grey.0}",
-				"type": "color"
+				"$type": "color"
 			},
 			"lockedInverted": {
 				"$value": "{color.grey.0}",
-				"type": "color"
+				"$type": "color"
 			},
 			"locked": {
 				"$value": "{color.grey.600}",
-				"type": "color"
+				"$type": "color"
 			}
 		},
 		"border": {
 			"default": {
 				"$value": "{color.grey.300}",
-				"type": "color"
+				"$type": "color"
 			},
 			"subtle": {
 				"$value": "{color.grey.200}",
-				"type": "color"
+				"$type": "color"
 			},
 			"disabled": {
 				"$value": "{color.grey.200}",
-				"type": "color"
+				"$type": "color"
 			},
 			"selected": {
 				"$value": "{color.grey.600}",
-				"type": "color"
+				"$type": "color"
 			},
 			"focused": {
 				"$value": "{color.grey.600}",
-				"type": "color"
+				"$type": "color"
 			}
 		}
 	}

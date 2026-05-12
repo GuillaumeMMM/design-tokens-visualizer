@@ -50,7 +50,9 @@
 			return;
 		}
 
-		const flattenTokens = flattenDTCGTokens(tokensJson);
+		const { tokens: flattenTokens, errors: flattenErrors } = flattenDTCGTokens(tokensJson);
+
+		console.log({ flattenErrors });
 
 		const tokenNodes: Map<string, DesignToken & { childrenKeys?: string[] }> = new Map();
 
@@ -135,7 +137,7 @@
 		}
 
 		edges = flowEdges;
-		errors = [];
+		errors = flattenErrors;
 	}
 
 	const nodeTypes = { tokenNode: TokenNode };
