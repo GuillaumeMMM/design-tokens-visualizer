@@ -1,42 +1,11 @@
-# sv
+# Design tokens visualizer
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Visualization tool for design tokens based on (part of) the [DTCG](https://www.designtokens.org/tr/2025.10/format/) (Design Tokens Community Group) specifications.
 
-## Creating a project
+## TODO
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@0.15.1 create --template minimal --types ts --add prettier eslint --install yarn token-visualizer
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- [ ] Support for all types of design tokens
+- [ ] Support for DTCG Alias resolution
+- [ ] Support for DTCG composite types
+- [ ] Support for DTCG tokens extensions
+- [ ] Real-time tokens edition from canvas
