@@ -1,6 +1,6 @@
 # Design tokens visualizer
 
-Visualization tool for design tokens based on (part of) the [DTCG](https://www.designtokens.org/tr/2025.10/format/) (Design Tokens Community Group) specifications.
+Visualization tool for design tokens based on (part of) the [DTCG](https://www.designtokens.org/tr/2025.10/format/) (Design Tokens Community Group) specifications. Accessible on [design-tokens-visualizer.guillaumemeigniez.me](https://design-tokens-visualizer.guillaumemeigniez.me).
 
 ## TODO
 
