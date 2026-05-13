@@ -2,19 +2,45 @@
 	import type { Node } from '@xyflow/svelte';
 	import type { TokenError } from '../types/TokenError';
 	import SidebarConsole from './SidebarConsole.svelte';
+	import { isLocalStorageAvailable } from '../utils/isLocalStorageAvailable';
 
 	const { tokensChanged, tokensStr, errors, nodes } = $props<{
 		tokensStr: string | null;
 		errors: TokenError[];
 		tokensChanged: (token: string | null) => void;
 		nodes: Node[];
+		tokensTextareaDimensions: { width: number; height: number };
 	}>();
 
 	let isOpen = $state<boolean>(true);
 
+	const textareaDimensionsStr = isLocalStorageAvailable()
+		? localStorage.getItem('textarea-dim')
+		: null;
+
+	let textareaDimensions = $state(
+		textareaDimensionsStr ? JSON.parse(textareaDimensionsStr) : { width: 0, height: 0 }
+	);
+
 	function onTokensChange(e: Event) {
 		const inputTokens = (e.target as HTMLInputElement).value;
 		tokensChanged(inputTokens);
+	}
+
+	function observeResize(el: HTMLElement) {
+		const ro = new ResizeObserver(([entry]) => {
+			if (isLocalStorageAvailable()) {
+				localStorage.setItem(
+					'textarea-dim',
+					JSON.stringify({
+						width: entry.contentRect.width,
+						height: entry.contentRect.height
+					})
+				);
+			}
+		});
+		ro.observe(el);
+		return { destroy: () => ro.disconnect() };
 	}
 </script>
 
@@ -41,6 +67,9 @@
 						id="tokens"
 						value={tokensStr}
 						oninput={onTokensChange}
+						style:width={`${textareaDimensions.width}px`}
+						style:height={`${textareaDimensions.height}px`}
+						use:observeResize
 					></textarea>
 				</label>
 			</div>
@@ -68,6 +97,7 @@
 	.sidebar {
 		height: 100%;
 		padding: 1rem;
+		max-width: 100vw;
 
 		.sidebar-panel {
 			background-color: var(--mdf-color-background-default);
@@ -103,6 +133,7 @@
 		font-size: 0.8rem;
 		line-height: 1rem;
 		max-height: 75vh;
+		max-width: 100%;
 	}
 
 	.expandable-section {
