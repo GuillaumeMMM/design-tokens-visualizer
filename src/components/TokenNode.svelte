@@ -2,6 +2,7 @@
 	import { Handle, Position } from '@xyflow/svelte';
 	import type { DesignToken } from '../types/DesignTokens';
 	import ColorToken from './token-types/ColorToken.svelte';
+	import UnknownToken from './token-types/UnknownToken.svelte';
 
 	let { data, id } = $props<{
 		data: { token: DesignToken; rootToken?: DesignToken };
@@ -11,7 +12,7 @@
 	const isLeaf = $derived(!data.token.childrenKeys);
 	const label = $derived(id.replace('{', '').replace('}', ''));
 
-	const tokenType = $derived(data.token.$type || data.rootToken?.$type);
+	const tokenType = $derived(data.token.$type);
 </script>
 
 <div class="token-node">
@@ -19,6 +20,8 @@
 		<div class="token-node-left">
 			{#if tokenType === 'color'}
 				<ColorToken token={data.token} {isRoot} rootToken={data.rootToken}></ColorToken>
+			{:else}
+				<UnknownToken></UnknownToken>
 			{/if}
 		</div>
 		<div class="token-node-right">
