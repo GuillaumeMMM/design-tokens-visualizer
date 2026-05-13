@@ -4,7 +4,9 @@
 </script>
 
 <div class="number-token">
-	<TreeIcon></TreeIcon>
+	<div class="icon">
+		<TreeIcon></TreeIcon>
+	</div>
 </div>
 
 <style>
@@ -17,5 +19,10 @@
 		align-items: center;
 		justify-content: center;
 		background-color: var(--mdf-color-background-default);
+
+		.icon {
+			display: flex;
+			width: 2rem;
+		}
 	}
 </style>

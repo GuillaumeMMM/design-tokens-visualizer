@@ -3,7 +3,7 @@
 </script>
 
 <div class="number-token">
-	<SigmaIcon></SigmaIcon>
+	<div class="icon"><SigmaIcon></SigmaIcon></div>
 </div>
 
 <style>
@@ -16,5 +16,10 @@
 		align-items: center;
 		justify-content: center;
 		background-color: var(--mdf-color-background-default);
+
+		.icon {
+			display: flex;
+			width: 2rem;
+		}
 	}
 </style>

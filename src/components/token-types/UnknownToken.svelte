@@ -2,7 +2,9 @@
 	import ErrorIcon from '../icons/ErrorIcon.svelte';
 </script>
 
-<div class="unknown-token"><ErrorIcon></ErrorIcon></div>
+<div class="unknown-token">
+	<div class="icon"><ErrorIcon></ErrorIcon></div>
+</div>
 
 <style>
 	.unknown-token {
@@ -22,5 +24,10 @@
 			var(--stripes-2) 10px,
 			var(--stripes-2) 20px
 		);
+
+		.icon {
+			display: flex;
+			width: 2rem;
+		}
 	}
 </style>
