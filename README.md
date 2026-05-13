@@ -4,7 +4,7 @@ Visualization tool for design tokens based on (part of) the [DTCG](https://www.d
 
 ## TODO
 
-- [ ] Support for all types of design tokens
+- [x] Support for all types of design tokens values
 - [ ] Support for DTCG Alias resolution
 - [ ] Support for DTCG composite types
 - [ ] Support for DTCG tokens extensions

@@ -3,6 +3,8 @@
 	import type { DesignToken } from '../types/DesignTokens';
 	import ColorToken from './token-types/ColorToken.svelte';
 	import UnknownToken from './token-types/UnknownToken.svelte';
+	import NumberToken from './token-types/NumberToken.svelte';
+	import ObjectToken from './token-types/ObjectToken.svelte';
 
 	let { data, id } = $props<{
 		data: { token: DesignToken; rootToken?: DesignToken };
@@ -13,14 +15,21 @@
 	const label = $derived(id.replace('{', '').replace('}', ''));
 
 	const tokenType = $derived(data.token.$type);
+	const tokenValue = $derived<DesignToken['$value']>(
+		isRoot ? data.token.$value : data.rootToken.$value
+	);
 </script>
 
 <div class="token-node">
 	<div class={`token-node-box ${isLeaf ? 'leaf' : ''} ${isRoot ? 'root' : ''}`}>
 		<div class="token-node-left">
 			{#if tokenType === 'color'}
-				<ColorToken token={data.token} {isRoot} rootToken={data.rootToken}></ColorToken>
-			{:else}
+				<ColorToken {tokenValue}></ColorToken>
+			{:else if tokenType === 'number' || typeof tokenValue === 'number'}
+				<NumberToken></NumberToken>
+			{:else if typeof tokenValue === 'object'}
+				<ObjectToken></ObjectToken>
+			{:else if !tokenType}
 				<UnknownToken></UnknownToken>
 			{/if}
 		</div>
@@ -60,6 +69,14 @@
 			border-bottom-right-radius: 10px;
 			border-top-right-radius: 10px;
 			border-left: 1px solid var(--mdf-color-border-default);
+		}
+
+		.token-node-left {
+			width: 40px;
+		}
+
+		&.root .token-node-left {
+			width: 60px;
 		}
 
 		.token-node-label,

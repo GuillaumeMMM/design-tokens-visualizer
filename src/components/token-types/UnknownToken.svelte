@@ -1,10 +1,14 @@
-<div class="unknown-token">?</div>
+<script lang="ts">
+	import ErrorIcon from '../icons/ErrorIcon.svelte';
+</script>
+
+<div class="unknown-token"><ErrorIcon></ErrorIcon></div>
 
 <style>
 	.unknown-token {
 		border-top-left-radius: 10px;
 		border-bottom-left-radius: 10px;
-		width: 40px;
+		width: 100%;
 		height: 100%;
 		display: flex;
 		align-items: center;
