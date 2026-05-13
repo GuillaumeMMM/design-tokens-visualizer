@@ -11,7 +11,7 @@
 	const isLeaf = $derived(!data.token.childrenKeys);
 	const label = $derived(id.replace('{', '').replace('}', ''));
 
-	const tokenType = $derived(data.token.type || data.rootToken?.type);
+	const tokenType = $derived(data.token.$type || data.rootToken?.$type);
 </script>
 
 <div class="token-node">
