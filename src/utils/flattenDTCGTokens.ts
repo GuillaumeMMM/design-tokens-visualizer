@@ -42,7 +42,7 @@ function _flattenTokens(
 			const token = sliceValue as JSONDesignToken;
 
 			const finalType = token.$type ?? inherited.type;
-			const finalKey = `{${[...keyMemo, key].join('.')}}`;
+			const finalKey = [...keyMemo, key].join('.');
 
 			if (!finalType) {
 				result.errors.push({ type: 'MISSING_TYPE', token: { ...token, key: finalKey } });

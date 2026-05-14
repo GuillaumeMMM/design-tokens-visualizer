@@ -63,7 +63,10 @@
 		flattenTokens
 			.filter((t) => typeof t.$value === 'string' && t.$value.startsWith('{'))
 			.forEach((t) => {
-				const match = tokenNodes.get(t.$value as string);
+				if (typeof t.$value !== 'string') {
+					return;
+				}
+				const match = tokenNodes.get(t.$value.substring(1, t.$value.length - 1));
 
 				if (match) {
 					tokenNodes.set(match.key, {
