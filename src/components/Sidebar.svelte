@@ -3,13 +3,14 @@
 	import type { TokenError } from '../types/TokenError';
 	import SidebarConsole from './SidebarConsole.svelte';
 	import { isLocalStorageAvailable } from '../utils/isLocalStorageAvailable';
+	import IconButton from './IconButton.svelte';
+	import OpenPanelIcon from './icons/OpenPanelIcon.svelte';
 
 	const { tokensChanged, tokensStr, errors, nodes } = $props<{
 		tokensStr: string | null;
 		errors: TokenError[];
 		tokensChanged: (token: string | null) => void;
 		nodes: Node[];
-		tokensTextareaDimensions: { width: number; height: number };
 	}>();
 
 	let isOpen = $state<boolean>(true);
@@ -48,14 +49,13 @@
 	<div class="sidebar-panel">
 		<div class="sidebar-header">
 			<h1>Tokens visualizer</h1>
-			<button
-				type="button"
-				class="mdf-button"
-				aria-expanded={isOpen}
-				aria-controls="sidebar-content"
+			<IconButton
+				ariaExpanded={isOpen}
+				ariaControls="sidebar-content"
+				label={isOpen ? 'Close the sidebar' : 'Open the sidebar'}
 				onclick={() => {
 					isOpen = !isOpen;
-				}}>{isOpen ? 'close' : 'open'}</button
+				}}><OpenPanelIcon></OpenPanelIcon></IconButton
 			>
 		</div>
 		{#if isOpen}
@@ -98,6 +98,7 @@
 		height: 100%;
 		padding: 1rem;
 		max-width: 100vw;
+		max-height: 100vh;
 
 		.sidebar-panel {
 			background-color: var(--mdf-color-background-default);
