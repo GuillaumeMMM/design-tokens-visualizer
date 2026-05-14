@@ -174,7 +174,6 @@
 		position: absolute;
 		left: 0;
 		top: 0;
-		height: 100vh;
 		z-index: 1;
 	}
 
