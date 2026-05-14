@@ -82,6 +82,7 @@
 		.token-node-label,
 		.token-node-value {
 			padding: 12px 20px;
+			min-height: 42px;
 		}
 
 		.token-node-value {

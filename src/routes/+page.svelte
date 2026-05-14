@@ -52,18 +52,16 @@
 
 		const { tokens: flattenTokens, errors: flattenErrors } = flattenDTCGTokens(tokensJson);
 
-		console.log({ flattenErrors });
-
 		const tokenNodes: Map<string, DesignToken & { childrenKeys?: string[] }> = new Map();
 
 		flattenTokens
-			.filter((t) => t.$value)
+			.filter((t) => t.$value !== undefined)
 			.forEach((t) => {
 				tokenNodes.set(t.key, { ...t, childrenKeys: [] });
 			});
 
 		flattenTokens
-			.filter((t) => t.$value && typeof t.$value === 'string' && t.$value.startsWith('{'))
+			.filter((t) => typeof t.$value === 'string' && t.$value.startsWith('{'))
 			.forEach((t) => {
 				const match = tokenNodes.get(t.$value as string);
 
