@@ -25,6 +25,10 @@
 		UNAUTHORIZED_KEY_STR: {
 			message: (token) => `Token ${token.key} keys contain unauthorized characters`,
 			criticity: 'error'
+		},
+		INEXISTANT_REF: {
+			message: (token) => `Token ${token.key} references a token that does not exist`,
+			criticity: 'warning'
 		}
 	};
 </script>

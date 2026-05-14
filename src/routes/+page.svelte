@@ -70,6 +70,8 @@
 						...match,
 						childrenKeys: (match.childrenKeys || []).concat(t.key)
 					});
+				} else {
+					flattenErrors.push({ type: 'INEXISTANT_REF', token: t });
 				}
 			});
 
