@@ -4,6 +4,12 @@
 	viewBox="0 0 31 31"
 	aria-label="Token visualizer logo"
 >
+	<defs>
+		<linearGradient id="containerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+			<stop offset="0%" stop-color="var(--mdf-color-text-default)" stop-opacity="0.1" />
+			<stop offset="100%" stop-color="var(--mdf-color-text-default)" stop-opacity="0.05" />
+		</linearGradient>
+	</defs>
 	<path
 		d="M 1.7327 23.3032 L 1.6664 23.0569 C 0.2885 18.1088 0.2932 12.8764 1.6664 7.9329 L 1.7328 7.6867 C 2.4667 5.0492 4.5312 2.9942 7.1781 2.2792 L 7.7322 2.1324 C 12.6898 0.7923 17.9222 0.8255 22.8609 2.2413 C 25.4557 2.9799 27.4776 5.0208 28.1974 7.6157 L 28.2874 7.9329 C 29.6653 12.8811 29.6606 18.1135 28.2874 23.057 L 28.1974 23.3742 C 27.4729 25.9738 25.4558 28.0099 22.8609 28.7486 C 17.9175 30.1597 12.6898 30.1976 7.7227 28.8575 L 7.1687 28.7107 C 4.5264 28.0004 2.4572 25.9407 1.7232 23.3032 L 1.7327 23.3032 Z"
 		class="container"
@@ -16,10 +22,10 @@
 
 <style>
 	.container {
-		stroke: var(--mdf-color-text-muted);
+		stroke: var(--mdf-color-border-muted);
 		stroke-width: 1px;
-		fill: var(--mdf-color-background-muted);
-		box-shadow: 0px 1px 1px var(--mdf-color-border-default);
+		fill: url(#containerGradient);
+		filter: drop-shadow(0px 1px 1px var(--mdf-color-border-muted));
 	}
 
 	.box {

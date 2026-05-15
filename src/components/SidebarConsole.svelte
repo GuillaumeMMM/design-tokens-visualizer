@@ -36,25 +36,27 @@
 <div class="console">
 	<ul class="console-errors">
 		{#each errors as error}
-			<li class="console-error">
-				{errorsDisplay[(error as TokenError).type].criticity === 'error' ? '⛔ ' : '⚠️ '}
-				{errorsDisplay[(error as TokenError).type].message(error.token)}
-			</li>
+			{#if errorsDisplay[(error as TokenError).type].criticity === 'error'}
+				<li class="console-error mdf-block mdf-block-error">
+					{errorsDisplay[(error as TokenError).type].message(error.token)}
+				</li>
+			{/if}
+			{#if errorsDisplay[(error as TokenError).type].criticity === 'warning'}
+				<li class="console-error mdf-block mdf-block-warning">
+					{errorsDisplay[(error as TokenError).type].message(error.token)}
+				</li>
+			{/if}
 		{/each}
 	</ul>
 </div>
 
 <style>
 	.console {
-		padding: 5px 0;
+		padding: 10px;
 		.console-errors {
 			display: flex;
 			flex-direction: column;
-			gap: 2px;
-
-			.console-error {
-				padding: 2px 5px;
-			}
+			gap: 10px;
 		}
 	}
 </style>

@@ -31,6 +31,7 @@
 		background-color: var(--mdf-color-background-muted);
 		box-shadow: 0px 1px 1px var(--mdf-color-border-default);
 		cursor: pointer;
+		color: inherit;
 
 		.icon {
 			display: flex;
