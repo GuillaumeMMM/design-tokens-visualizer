@@ -6,6 +6,11 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>Design tokens visualizer</title>
+	<meta
+		name="description"
+		content="Graph visualizaton tool for design tokens following the DTCG (Design Tokens Community Group) format."
+	/>
 </svelte:head>
 
 {@render children()}
