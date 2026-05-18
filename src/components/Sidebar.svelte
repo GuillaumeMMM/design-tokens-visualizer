@@ -76,7 +76,7 @@
 		<div class="sidebar-header">
 			<div class="left">
 				<div class="logo"><Logo></Logo></div>
-				<h1 class="title">Tokens Visualizer</h1>
+				<h1 class="title">Design Tokens Visualizer</h1>
 			</div>
 			<IconButton
 				ariaExpanded={isOpen}

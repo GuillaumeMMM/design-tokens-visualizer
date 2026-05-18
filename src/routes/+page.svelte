@@ -202,6 +202,7 @@
 		right: calc(3rem + 10px);
 		z-index: 1;
 		padding: 0 8px;
+		font-size: 0.8rem;
 
 		.icon {
 			width: 1rem;
