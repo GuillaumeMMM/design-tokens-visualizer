@@ -7,7 +7,7 @@ Visualization tool for design tokens based on (part of) the [DTCG](https://www.d
 ## TODO
 
 - [x] Support for all types of design tokens values
-- [ ] Support for DTCG Alias resolution
+- [x] Support for DTCG Alias resolution (curly brace syntax only)
 - [ ] Support for DTCG composite types
 - [ ] Support for DTCG tokens extensions
 - [ ] Real-time tokens edition from canvas

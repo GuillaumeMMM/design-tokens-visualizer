@@ -23,7 +23,7 @@
 <div class="token-node">
 	<div class={`token-node-box ${isLeaf ? 'leaf' : ''} ${isRoot ? 'root' : ''}`}>
 		<div class="token-node-left">
-			{#if tokenType === 'color'}
+			{#if tokenType === 'color' && typeof tokenValue === 'string'}
 				<ColorToken {tokenValue}></ColorToken>
 			{:else if tokenType === 'number' || typeof tokenValue === 'number'}
 				<NumberToken></NumberToken>
