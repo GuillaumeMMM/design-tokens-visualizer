@@ -14,6 +14,8 @@
 	import Sidebar from '../components/Sidebar.svelte';
 	import type { TokenError } from '../types/TokenError';
 	import { isLocalStorageAvailable } from '../utils/isLocalStorageAvailable';
+	import IconButton from '../components/IconButton.svelte';
+	import GithubIcon from '../components/icons/GithubIcon.svelte';
 
 	let tokensStr = $state<string | null>(null);
 	let nodes = $state.raw<Node[]>([]);
@@ -159,6 +161,10 @@
 		{nodeTypes}
 	>
 		<Controls showLock={false} position={'bottom-right'} />
+		<a class="github-button" href="https://github.com/GuillaumeMMM/design-tokens-visualizer"
+			><div class="icon"><GithubIcon></GithubIcon></div>
+			Github</a
+		>
 		<Background variant={BackgroundVariant.Dots} gap={50} size={4} />
 	</SvelteFlow>
 </div>
@@ -175,6 +181,45 @@
 		left: 0;
 		top: 0;
 		z-index: 1;
+	}
+
+	.github-button {
+		color: inherit;
+		text-decoration: none;
+		font-family: inherit;
+		border-radius: 10px;
+		height: 34px;
+		line-height: 34px;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		border: 1px solid var(--mdf-color-border-muted);
+		background-color: var(--mdf-color-background-muted);
+		box-shadow: 0px 1px 1px var(--mdf-color-border-default);
+		cursor: pointer;
+		position: absolute;
+		bottom: 15px;
+		right: calc(3rem + 10px);
+		z-index: 1;
+		padding: 0 8px;
+
+		.icon {
+			width: 1rem;
+			display: flex;
+			align-items: center;
+		}
+
+		&:hover,
+		&:active {
+			background-color: var(--mdf-color-background-default);
+		}
+
+		&:focus-visible {
+			background-color: var(--mdf-color-background-default);
+			box-shadow: 0px 0px 2px var(--mdf-color-border-default);
+			outline: 2px solid var(--mdf-color-outline-default);
+			outline-offset: 2px;
+		}
 	}
 
 	:global {
