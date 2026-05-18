@@ -7,6 +7,7 @@
 	import OpenPanelIcon from './icons/OpenPanelIcon.svelte';
 	import Logo from './icons/Logo.svelte';
 	import ClosePanelIcon from './icons/ClosePanelIcon.svelte';
+	import { onMount } from 'svelte';
 
 	const { tokensChanged, tokensStr, errors, nodes } = $props<{
 		tokensStr: string | null;
@@ -14,6 +15,21 @@
 		tokensChanged: (token: string | null) => void;
 		nodes: Node[];
 	}>();
+
+	let sentinel: HTMLDivElement | null = null;
+	let scrolled = $state(false);
+
+	onMount(() => {
+		const observer = new IntersectionObserver(([entry]) => {
+			scrolled = !entry.isIntersecting;
+		});
+
+		if (sentinel) {
+			observer.observe(sentinel);
+		}
+
+		return () => observer.disconnect();
+	});
 
 	let isOpen = $state<boolean>(
 		isLocalStorageAvailable()
@@ -24,9 +40,9 @@
 	);
 
 	function getStoredDimensions() {
-		if (!isLocalStorageAvailable()) return { width: 500, height: 300 };
+		if (!isLocalStorageAvailable()) return { width: 400, height: 300 };
 		const stored = localStorage.getItem('textarea-dim');
-		return stored ? JSON.parse(stored) : { width: 500, height: 300 };
+		return stored ? JSON.parse(stored) : { width: 400, height: 300 };
 	}
 
 	function onTokensChange(e: Event) {
@@ -54,8 +70,9 @@
 	}
 </script>
 
-<div class={`sidebar ${isOpen ? 'open' : 'closed'}`}>
+<div class={`sidebar ${isOpen ? 'open' : 'closed'} ${scrolled ? 'scrolled' : ''}`}>
 	<div class="sidebar-panel">
+		<div bind:this={sentinel}></div>
 		<div class="sidebar-header">
 			<div class="left">
 				<div class="logo"><Logo></Logo></div>
@@ -145,7 +162,7 @@
 			justify-content: space-between;
 			gap: 2rem;
 			position: sticky;
-			top: -1rem;
+			top: 0;
 			background-color: var(--mdf-color-background-default);
 
 			.left {
@@ -172,6 +189,10 @@
 			border-bottom: 1px solid var(--mdf-color-border-default);
 			border-bottom-left-radius: 0;
 			border-bottom-right-radius: 0;
+		}
+
+		&.open.scrolled .sidebar-header {
+			box-shadow: 0px 2px 3px var(--mdf-color-border-default);
 		}
 	}
 

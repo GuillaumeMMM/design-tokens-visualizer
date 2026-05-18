@@ -154,7 +154,7 @@
 		{nodes}
 		{edges}
 		minZoom={0}
-		initialViewport={{ zoom: 0.5, x: 200, y: 100 }}
+		fitView={true}
 		proOptions={{ hideAttribution: true }}
 		{nodeTypes}
 	>
